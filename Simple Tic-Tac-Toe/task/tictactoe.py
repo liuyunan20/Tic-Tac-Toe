@@ -4,12 +4,23 @@ for i in range(3):
     grids.append([])
     for x in range(3):
         grids[i].append(' ')
+
+
 # Analyze if there are 3 in a row
-win_cells = [grids[0], grids[1], grids[2], [grids[0][0], grids[1][0], grids[2][0]],
-             [grids[0][1], grids[1][1], grids[2][1]],
-             [grids[0][2], grids[1][2], grids[2][2]],
-             [grids[0][0], grids[1][1], grids[2][2]],
-             [grids[0][2], grids[1][1], grids[2][0]]]
+def win_check():
+    win_cells = [[grids[0][0], grids[0][1], grids[0][2]],
+                 [grids[1][0], grids[1][1], grids[1][2]],
+                 [grids[2][0], grids[2][1], grids[2][2]],
+                 [grids[0][0], grids[1][0], grids[2][0]],
+                 [grids[0][1], grids[1][1], grids[2][1]],
+                 [grids[0][2], grids[1][2], grids[2][2]],
+                 [grids[0][0], grids[1][1], grids[2][2]],
+                 [grids[0][2], grids[1][1], grids[2][0]]
+                 ]
+    global x3_in_row
+    global o3_in_row
+    x3_in_row = ['X', 'X', 'X'] in win_cells
+    o3_in_row = ['O', 'O', 'O'] in win_cells
 
 
 def print_grid():
@@ -51,16 +62,14 @@ def check_co(cos):
 
 # print a blank grid
 print_grid()
-
-# input the coordinates and put 'X' or 'O' in the grid
+x3_in_row = o3_in_row = False
+# input the coordinates and put 'X' or 'O in the grid
 for i in range(9):
     coordinates = input('Enter the coordinates:').split()
     c = 0  # check if coordinates is available
     check_co(coordinates)
     print_grid()
-    x3_in_row = ['X', 'X', 'X'] in win_cells
-    o3_in_row = ['O', 'O', 'O'] in win_cells
-    print(win_cells)
+    win_check()
     if x3_in_row:
         print('X wins')
         break
@@ -69,4 +78,3 @@ for i in range(9):
         break
     elif i == 8:
         print('Draw')
-        print(x3_in_row)
